@@ -2,6 +2,7 @@ package pl.zarosla.webapp.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 public class Plant {
@@ -11,7 +12,6 @@ public class Plant {
     private Long id;
 
     @ManyToOne
-    @ForeignKey(name="ID_Country")
     private Garden garden;
 
     private boolean presentOrPlanned;
@@ -23,6 +23,9 @@ public class Plant {
     private String type;
     private String name;
     private int status;
+    @OneToMany
+    @JoinColumn(name="ID_PLANT")
+    private Set<Activity> activities;
 
     @Column(length = 1024)
     private String notatka;
