@@ -19,8 +19,11 @@ public class Garden {
     private boolean active;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="ID_GARDEN")
+    @JoinColumn(name="GARDEN_ID")
     private Set<Plant> plants;
+
+    public Garden() {
+    }
 
     public Long getId() {
         return id;

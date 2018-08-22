@@ -13,7 +13,7 @@ public class ActivityType {
     private String activityType;
 
     @OneToMany
-    @JoinColumn(name="ID_ACTIVITYTYPE")
+    @JoinColumn(name="ACTIVITY_TYPE_ID")
     private List<Activity> activities;
 
     public ActivityType() {

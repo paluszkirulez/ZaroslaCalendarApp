@@ -24,7 +24,7 @@ public class Plant {
     private String name;
     private int status;
     @OneToMany
-    @JoinColumn(name="ID_PLANT")
+    @JoinColumn(name="PLANT_ID")
     private Set<Activity> activities;
 
     @Column(length = 1024)
