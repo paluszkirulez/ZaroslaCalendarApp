@@ -1,5 +1,7 @@
 package pl.zarosla.webapp.domain;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,22 +17,39 @@ public class User {
     private String surname;
     private String password;
     private String avatarPicture;
-    private boolean active;
-    private int userType;
+
+    private boolean active=true;
+    private int userType=1;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="USER_IDb")
     private Set<Garden> gardens;
 
     public User(String email, String name, String surname, String password, String avatarPicture, boolean active, int userType, Set<Garden> gardens) {
+        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.password = password;
+        this.password = hashed;
         this.avatarPicture = avatarPicture;
-        this.active = active;
+        this.active = true;
         this.userType = userType;
         this.gardens = gardens;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", avatarPicture='" + avatarPicture + '\'' +
+                ", active=" + active +
+                ", userType=" + userType +
+                ", gardens=" + gardens +
+                '}';
     }
 
     public User() {
@@ -65,6 +84,8 @@ public class User {
     }
 
     public void setSurname(String surname) {
+
+
         this.surname = surname;
     }
 
@@ -73,7 +94,9 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.password = hashed;
     }
 
     public String getAvatarPicture() {
