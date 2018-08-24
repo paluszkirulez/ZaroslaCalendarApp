@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all books</title>
+</head>
+<body>
+<h2>List of all your gardens</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Creation date</th>
+        <th>Number of plants</th>
+
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="garden: ${gardens}">
+        <td th:text="${garden.name}">Autor</td>
+        <td th:text="${garden.getCreationDateAsString()}">Tytuł</td>
+        <td th:text="${book.numberOfPlants}">Wydawca</td>
+        <td><a th:href="@{'/gardens/edit/' + ${garden.id}}">Edit</a> </td>
+        <td><a th:href="@{'/gardens/delete-choice/' + ${garden.id}}">Delete</a> </td>
+    </tr>
+    </tbody>
+</table>
+<p/>
+<p><a href="/gardens/add">Dodaj nowy ogród</a></p>
+<p/>
+<p><a href="/gardens/find">Znajdź ogród</a></p>
+</body>
+</html>

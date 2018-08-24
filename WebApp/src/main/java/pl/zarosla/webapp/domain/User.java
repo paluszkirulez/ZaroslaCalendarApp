@@ -23,7 +23,7 @@ public class User {
     private int userType=1;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="USER_IDb")
+    @JoinColumn(name="USER_ID")
     private Set<Garden> gardens;
 
     public User(String email, String name, String surname, String password, String avatarPicture, boolean active, int userType, Set<Garden> gardens) {

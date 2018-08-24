@@ -22,6 +22,8 @@ public class Garden {
     @JoinColumn(name="GARDEN_ID")
     private Set<Plant> plants;
 
+    private int numberOfPlants = 0;
+
     public Garden() {
     }
 
@@ -53,6 +55,10 @@ public class Garden {
         return creationDate;
     }
 
+    public String getCreationDateAsString(){
+        return creationDate.toString();
+    }
+
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
@@ -73,11 +79,19 @@ public class Garden {
         this.plants = plants;
     }
 
+    public int getNumberOfPlants() {
+        return numberOfPlants;
+    }
+    public String getNumberOfPlantsAsString() {
+        return String.valueOf(numberOfPlants);
+    }
+
     public Garden(User user, String name, Date creationDate, boolean active, Set<Plant> plants) {
         this.user = user;
         this.name = name;
         this.creationDate = creationDate;
         this.active = active;
         this.plants = plants;
+        this.numberOfPlants = plants.size();
     }
 }

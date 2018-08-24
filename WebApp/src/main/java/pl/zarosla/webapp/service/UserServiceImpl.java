@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User myUser = userDao.findDistinctByEmail(username);
-        System.out.println(username);
+
         if(myUser == null){
             throw new UsernameNotFoundException(username);
         }
