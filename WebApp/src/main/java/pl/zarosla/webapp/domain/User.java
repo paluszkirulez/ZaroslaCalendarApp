@@ -1,6 +1,7 @@
 package pl.zarosla.webapp.domain;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class User {
     private Set<Garden> gardens;
 
     public User(String email, String name, String surname, String password, String avatarPicture, boolean active, int userType, Set<Garden> gardens) {
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+        String hashed = new BCryptPasswordEncoder(11).encode(password);
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -95,7 +96,7 @@ public class User {
 
     public void setPassword(String password) {
 
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+        String hashed = new BCryptPasswordEncoder(11).encode(password);
         this.password = hashed;
     }
 

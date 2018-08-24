@@ -4,7 +4,11 @@ import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.zarosla.webapp.BusinessModule.MyUserPrincipal;
 import pl.zarosla.webapp.dao.UserDao;
 import pl.zarosla.webapp.domain.User;
 
@@ -13,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -49,7 +53,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email){
-        return userDao.findDistinctByEmail(email);
+    public UserDetails findUserByEmail(String email){
+        User myUser = userDao.findDistinctByEmail(email);
+        if(myUser == null){
+            throw new UsernameNotFoundException(email);
+        }
+        return new MyUserPrincipal(myUser);
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User myUser = userDao.findDistinctByEmail(username);
+        System.out.println(username);
+        if(myUser == null){
+            throw new UsernameNotFoundException(username);
+        }
+        return new MyUserPrincipal(myUser);
     }
 }
