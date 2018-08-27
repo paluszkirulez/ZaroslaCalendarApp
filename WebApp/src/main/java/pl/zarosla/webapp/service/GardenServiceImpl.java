@@ -32,8 +32,8 @@ public class GardenServiceImpl implements GardenService {
     }
 
     @Override
-    public List<Garden> findGardensByUser(Long userId) {
-        return gardenDao.findAllByUser(userId);
+    public List<Garden> findGardensByUser(User user) {
+        return gardenDao.findAllByUser(user);
     }
 
 

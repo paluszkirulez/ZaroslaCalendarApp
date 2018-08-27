@@ -86,6 +86,19 @@ public class Garden {
         return String.valueOf(numberOfPlants);
     }
 
+    @Override
+    public String toString() {
+        return "Garden{" +
+                "id=" + id +
+                ", user=" + user +
+                ", name='" + name + '\'' +
+                ", creationDate=" + creationDate +
+                ", active=" + active +
+                ", plants=" + plants +
+                ", numberOfPlants=" + numberOfPlants +
+                '}';
+    }
+
     public Garden(User user, String name, Date creationDate, boolean active, Set<Plant> plants) {
         this.user = user;
         this.name = name;

@@ -19,17 +19,17 @@
     </thead>
     <tbody>
     <tr th:each="garden: ${gardens}">
-        <td th:text="${garden.name}">Autor</td>
-        <td th:text="${garden.getCreationDateAsString()}">Tytuł</td>
-        <td th:text="${book.numberOfPlants}">Wydawca</td>
-        <td><a th:href="@{'/gardens/edit/' + ${garden.id}}">Edit</a> </td>
-        <td><a th:href="@{'/gardens/delete-choice/' + ${garden.id}}">Delete</a> </td>
+        <td th:text="${garden.name}">Nazwa ogrodu</td>
+        <td th:text="${garden.getCreationDateAsString()}">Data utworzenia</td>
+        <td th:text="${garden.numberOfPlants}">Liczba roślin</td>
+        <td><a th:href="@{'/user-plants/' + ${garden.id}}">Show plants</a> </td>
+        <td><a th:href="@{'/user-gardens/delete-choice/' + ${garden.id}}">Delete</a> </td>
     </tr>
     </tbody>
 </table>
 <p/>
-<p><a href="/gardens/add">Dodaj nowy ogród</a></p>
+<p><a href="/user-gardens/add">Add new garden</a></p>
 <p/>
-<p><a href="/gardens/find">Znajdź ogród</a></p>
+<p><a href="/gardens/find">find gardens</a></p>
 </body>
 </html>

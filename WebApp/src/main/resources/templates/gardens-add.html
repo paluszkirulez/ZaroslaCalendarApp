@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Register new garden </title>
+</head>
+<body>
+
+<form action="#" th:action="@{/user-gardens/add}" th:object="${newgarden}" method="post">
+    <div><label> Garden Name : <input type="text" name="name"/> </label></div>
+    <div><input type="submit" value="Add new garden"/></div>
+</form>
+
+</body>
+</html>
