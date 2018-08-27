@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all plants for your garden</title>
+</head>
+<body>
+<h2>List of all plants in your garden</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Specie</th>
+        <th>Type</th>
+        <th>Condition</th>
+        <th>Planting date</th>
+        <th>Last watering date</th>
+        <th>Next watering date</th>
+        <th>Watering frequency</th>
+        <th>Next transplantation</th>
+        <th>Comments</th>
+
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="plant: ${plants}">
+        <td th:text="${plant.getName()}">Nazwa ogrodu</td>
+        <td th:text="${plant.getPlantingDateAsString()}">Data posadzenia</td>
+        <td th:text="${plant.getType()}">Plant type</td>
+
+    </tr>
+    </tbody>
+</table>
+<p/>
+<p><a href="/user-gardens/add">Add new garden</a></p>
+<p/>
+<p><a href="/gardens/find">find gardens</a></p>
+</body>
+</html>

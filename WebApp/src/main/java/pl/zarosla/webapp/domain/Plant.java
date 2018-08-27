@@ -16,7 +16,7 @@ public class Plant {
 
     private boolean presentOrPlanned;
     private Date plantingDate;
-    private Date witheredDate;
+    private Date wateredDate;
     private int wateringFrequency;
     private int transplantationDate;
     private String species;
@@ -60,17 +60,18 @@ public class Plant {
     public Date getPlantingDate() {
         return plantingDate;
     }
+    public String getPlantingDateAsString(){return String.valueOf(plantingDate);}
 
     public void setPlantingDate(Date plantingDate) {
         this.plantingDate = plantingDate;
     }
 
-    public Date getWitheredDate() {
-        return witheredDate;
+    public Date getWateredDate() {
+        return wateredDate;
     }
 
-    public void setWitheredDate(Date witheredDate) {
-        this.witheredDate = witheredDate;
+    public void setWateredDate(Date witheredDate) {
+        this.wateredDate = witheredDate;
     }
 
     public int getWateringFrequency() {
@@ -136,7 +137,7 @@ public class Plant {
                 ", garden=" + garden +
                 ", presentOrPlanned=" + presentOrPlanned +
                 ", plantingDate=" + plantingDate +
-                ", witheredDate=" + witheredDate +
+                ", witheredDate=" + wateredDate +
                 ", wateringFrequency=" + wateringFrequency +
                 ", transplantationDate=" + transplantationDate +
                 ", species='" + species + '\'' +
@@ -150,7 +151,7 @@ public class Plant {
     public Plant(boolean presentOrPlanned, Date plantingDate, Date witheredDate, int wateringFrequency, int transplantationDate, String species, String type, String name, int status, String notatka) {
         this.presentOrPlanned = presentOrPlanned;
         this.plantingDate = plantingDate;
-        this.witheredDate = witheredDate;
+        this.wateredDate = witheredDate;
         this.wateringFrequency = wateringFrequency;
         this.transplantationDate = transplantationDate;
         this.species = species;

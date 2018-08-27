@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class GardenServiceImpl implements GardenService {
 
-    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(GardenServiceImpl.class);
 
     @Autowired
     private GardenDao gardenDao;
