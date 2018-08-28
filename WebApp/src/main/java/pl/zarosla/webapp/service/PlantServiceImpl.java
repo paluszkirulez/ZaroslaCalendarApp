@@ -2,6 +2,7 @@ package pl.zarosla.webapp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zarosla.webapp.dao.PlantDao;
 import pl.zarosla.webapp.domain.Garden;
@@ -15,6 +16,7 @@ public class PlantServiceImpl implements PlantService {
 
     private static Logger logger = LoggerFactory.getLogger(PlantServiceImpl.class);
 
+    @Autowired
     private PlantDao plantDao;
 
     @Override

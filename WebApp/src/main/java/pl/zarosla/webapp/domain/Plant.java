@@ -18,7 +18,7 @@ public class Plant {
     private Date plantingDate;
     private Date wateredDate;
     private int wateringFrequency;
-    private int transplantationDate;
+    private Date transplantationDate;
     private String species;
     private String type;
     private String name;
@@ -82,11 +82,11 @@ public class Plant {
         this.wateringFrequency = wateringFrequency;
     }
 
-    public int getTransplantationDate() {
+    public Date getTransplantationDate() {
         return transplantationDate;
     }
 
-    public void setTransplantationDate(int transplantationDate) {
+    public void setTransplantationDate(Date transplantationDate) {
         this.transplantationDate = transplantationDate;
     }
 
@@ -137,21 +137,22 @@ public class Plant {
                 ", garden=" + garden +
                 ", presentOrPlanned=" + presentOrPlanned +
                 ", plantingDate=" + plantingDate +
-                ", witheredDate=" + wateredDate +
+                ", wateredDate=" + wateredDate +
                 ", wateringFrequency=" + wateringFrequency +
                 ", transplantationDate=" + transplantationDate +
                 ", species='" + species + '\'' +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", status=" + status +
+                ", activities=" + activities +
                 ", notatka='" + notatka + '\'' +
                 '}';
     }
 
-    public Plant(boolean presentOrPlanned, Date plantingDate, Date witheredDate, int wateringFrequency, int transplantationDate, String species, String type, String name, int status, String notatka) {
+    public Plant(boolean presentOrPlanned, Date plantingDate, Date wateredDate, int wateringFrequency, Date transplantationDate, String species, String type, String name, int status, String notatka) {
         this.presentOrPlanned = presentOrPlanned;
         this.plantingDate = plantingDate;
-        this.wateredDate = witheredDate;
+        this.wateredDate = wateredDate;
         this.wateringFrequency = wateringFrequency;
         this.transplantationDate = transplantationDate;
         this.species = species;

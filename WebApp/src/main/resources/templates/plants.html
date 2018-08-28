@@ -26,16 +26,24 @@
     </thead>
     <tbody>
     <tr th:each="plant: ${plants}">
-        <td th:text="${plant.getName()}">Nazwa ogrodu</td>
-        <td th:text="${plant.getPlantingDateAsString()}">Data posadzenia</td>
+        <td th:text="${plant.getName()}">Nazwa rośliny</td>
+        <td th:text="${plant.getSpecies()}">Species</td>
         <td th:text="${plant.getType()}">Plant type</td>
+        <td th:text="${plant.getPlantingDate()}">Data posadzenia</td>
+        <td th:text="${plant.getStatus()}">Plant condition</td>
+        <td th:text="${plant.getWateredDate()}">Last watering date</td>
+        <td th:text="${plant.getWateredDate()}">Next watering date</td>
+        <td th:text="${plant.getWateringFrequency()}">Get watering frequency</td>
+        <td th:text="${plant.getTransplantationDate()}">Next proposed transplant</td>
+        <td th:text="${plant.getNotatka()}">comments</td>
+        <td><a th:href="@{'/user-plants/delete-plant/' + ${plant.id}}">Delete</a> </td>
 
     </tr>
     </tbody>
 </table>
 <p/>
-<p><a href="/user-gardens/add">Add new garden</a></p>
+<p><a th:href="@{'/user-plants/add/' + ${gardenid}}">Add new plant</a></p>
 <p/>
-<p><a href="/gardens/find">find gardens</a></p>
+<p><a href="/user-plants/find">find plant</a></p>
 </body>
 </html>
