@@ -72,6 +72,23 @@ public class PlantController {
         return "plants-add";
     }
 
+    @GetMapping("/user-plants/delete-plant/{id}")
+    String deleteChoice(@PathVariable("id") long plantId, Model model) {
+        long gardenid = plantService.findPlantById(plantId).get().getGarden().getId();
+        model.addAttribute("bId", plantId);
+        model.addAttribute("gardenid",gardenid);
+        return "delete-plant";
+    }
 
+    @GetMapping("/user-plants/delete/{deleteId}")
+    String deleteBook(@PathVariable("deleteId") long plantId, Model model) {
+
+        log.info("deletePlant(), id: {}", plantId);
+        long gardenid = plantService.findPlantById(plantId).get().getGarden().getId();
+        model.addAttribute("gardenid",gardenid);
+        plantService.deletePlant(plantId);
+
+        return "redirect:/user-plants/"+gardenid;
+    }
 
 }
