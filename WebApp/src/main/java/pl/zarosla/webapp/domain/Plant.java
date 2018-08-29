@@ -122,6 +122,11 @@ public class Plant {
         this.status = status;
     }
 
+
+    public User getUser(){
+        return this.getGarden().getUser();
+    }
+
     public String getNotatka() {
         return notatka;
     }
@@ -160,5 +165,6 @@ public class Plant {
         this.name = name;
         this.status = status;
         this.notatka = notatka;
+        this.garden.setNumberOfPlants(garden.getNumberOfPlants()+1);
     }
 }

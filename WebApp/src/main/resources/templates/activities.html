@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all activities for your plant</title>
+</head>
+<body>
+<h2>List of all activities for your plant</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Type of the activity</th>
+        <th>Notes</th>
+        <th>Date of the activity</th>
+        <th>Condition</th>
+
+
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="activity: ${activities}">
+        <td th:text="${activity.getActivityType()}">Nazwa rośliny</td>
+        <td th:text="${activity.getNotatka()}">Species</td>
+        <td th:text="${activity.getActivityDate()}">Plant type</td>
+
+        <td><a th:href="@{'/user-plants/activities/' + ${plant.id}}">Check activities</a> </td>
+        <td><a th:href="@{'/user-plants/delete-plant/' + ${plant.id}}">Delete</a> </td>
+
+    </tr>
+    </tbody>
+</table>
+<p/>
+<p><a th:href="@{'/user-plants/add/' + ${gardenid}}">Add new plant</a></p>
+<p/>
+<p><a href="/user-plants/find">find plant</a></p>
+</body>
+</html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.zarosla.webapp.BusinessModule.AuthenticationChecker;
 import pl.zarosla.webapp.BusinessModule.MyUserPrincipal;
 import pl.zarosla.webapp.dao.GardenDao;
 import pl.zarosla.webapp.domain.Garden;
@@ -33,10 +34,8 @@ public class PlantController {
     @GetMapping("/user-plants/{id}")
     public String getGardenPlants(@PathVariable("id") long gardenid, Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserPrincipal myUser = (MyUserPrincipal) authentication.getPrincipal();
         Garden tempGarden = gardenDao.findById(gardenid).get();
-        boolean checkUser = tempGarden.getUser().getId().equals(myUser.getId());
+        boolean checkUser = AuthenticationChecker.checkAuthentication(tempGarden.getUser().getId());
 
         model.addAttribute("plants",plantService
                 .findPlantByGarden( checkUser ? tempGarden : null ));

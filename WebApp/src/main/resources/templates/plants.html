@@ -36,6 +36,7 @@
         <td th:text="${plant.getWateringFrequency()}">Get watering frequency</td>
         <td th:text="${plant.getTransplantationDate()}">Next proposed transplant</td>
         <td th:text="${plant.getNotatka()}">comments</td>
+        <td><a th:href="@{'/user-plants/activities/' + ${plant.id}}">Check activities</a> </td>
         <td><a th:href="@{'/user-plants/delete-plant/' + ${plant.id}}">Delete</a> </td>
 
     </tr>

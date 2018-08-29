@@ -1,5 +1,9 @@
 package pl.zarosla.webapp.domain;
 
+import org.springframework.data.annotation.CreatedDate;
+import pl.zarosla.webapp.BusinessModule.AuthenticationChecker;
+import pl.zarosla.webapp.BusinessModule.MyUserPrincipal;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
@@ -15,6 +19,7 @@ public class Garden {
     private User user;
 
     private String name;
+
     private Date creationDate;
     private boolean active;
 
@@ -25,6 +30,10 @@ public class Garden {
     private int numberOfPlants = 0;
 
     public Garden() {
+    }
+
+    public void setNumberOfPlants(int numberOfPlants) {
+        this.numberOfPlants = numberOfPlants;
     }
 
     public Long getId() {
@@ -99,11 +108,12 @@ public class Garden {
                 '}';
     }
 
-    public Garden(User user, String name, Date creationDate, boolean active, Set<Plant> plants) {
+    public Garden(User user,String name, Date creationDate, Set<Plant> plants) {
+
         this.user = user;
         this.name = name;
         this.creationDate = creationDate;
-        this.active = active;
+        this.active = true;
         this.plants = plants;
         this.numberOfPlants = plants.size();
     }

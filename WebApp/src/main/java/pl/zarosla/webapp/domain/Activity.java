@@ -69,4 +69,8 @@ public class Activity {
     public void setActivityDate(Date activityDate) {
         this.activityDate = activityDate;
     }
+
+    public User getUser(){
+        return this.getPlant().getGarden().getUser();
+    }
 }

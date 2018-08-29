@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.zarosla.webapp.BusinessModule.AuthenticationChecker;
 import pl.zarosla.webapp.BusinessModule.MyUserPrincipal;
 import pl.zarosla.webapp.domain.Garden;
 import pl.zarosla.webapp.domain.User;
@@ -49,15 +50,14 @@ public class GardenController {
 
     @PostMapping("/user-gardens/add")
     public String saveGarden(@ModelAttribute Garden garden){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserPrincipal myUser = (MyUserPrincipal) authentication.getPrincipal();
-        Date date = new Date();
-        java.sql.Date myDate = new java.sql.Date(date.getTime());
-        garden.setCreationDate(myDate);
-        garden.setUser(myUser.getUser());
-        garden.setActive(true);
+
+        MyUserPrincipal myUser = AuthenticationChecker.gatCurrentAuthentication();
+
+
+
+
         log.info("saveGarden(), garden(): {}", garden);
-        System.out.println(garden.getId());
+
         gardenService.saveGarden(garden);
         return "redirect:/user-gardens";
     }
