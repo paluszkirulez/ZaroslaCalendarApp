@@ -1,4 +1,4 @@
-package pl.zarosla.webapp.service;
+package pl.zarosla.webapp.service.Implementations;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +8,7 @@ import pl.zarosla.webapp.BusinessModule.AuthenticationChecker;
 import pl.zarosla.webapp.dao.GardenDao;
 import pl.zarosla.webapp.domain.Garden;
 import pl.zarosla.webapp.domain.User;
+import pl.zarosla.webapp.service.GardenService;
 
 import java.util.Date;
 import java.util.List;

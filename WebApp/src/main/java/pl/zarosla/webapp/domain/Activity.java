@@ -15,6 +15,8 @@ public class Activity {
     @ManyToOne
     private ActivityType activityType;
 
+    private String activityTypeName;
+
     @Column(length = 1024)
     private String notatka;
 
@@ -23,11 +25,20 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(Plant plant, ActivityType activityType, String notatka, Date activityDate) {
+    public Activity(Plant plant, ActivityType activityType, String notatka, Date activityDate, String activityTypeName) {
         this.plant = plant;
         this.activityType = activityType;
         this.notatka = notatka;
         this.activityDate = activityDate;
+        this.activityTypeName = activityTypeName;
+    }
+
+    public String getActivityTypeName() {
+        return activityTypeName;
+    }
+
+    public void setActivityTypeName(String activityTypeName) {
+        this.activityTypeName = activityTypeName;
     }
 
     public Long getId() {

@@ -39,6 +39,9 @@ dependencies {
     compile group: 'org.mindrot', name: 'jbcrypt', version: '0.3m'
     testCompile("org.springframework.security:spring-security-test")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile 'org.webjars:bootstrap:4.6.1'
+    compile("org.webjars:jquery:2.0.3-1")
+    compile group: 'org.webjars', name: 'datatables', version: '1.10.19'
 
 }
 

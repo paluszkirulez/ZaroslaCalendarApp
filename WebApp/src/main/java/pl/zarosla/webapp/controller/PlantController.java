@@ -49,22 +49,28 @@ public class PlantController {
 
     @PostMapping("/user-plants/add/{gardenid}")
     public String savePlant(@ModelAttribute("gardenid") long gardenid, @ModelAttribute Plant plant){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserPrincipal myUser = (MyUserPrincipal) authentication.getPrincipal();
 
-        Date date = new Date();
-        java.sql.Date myDate = new java.sql.Date(date.getTime());
-        plant.setPlantingDate(myDate);
+
+        Garden tempGarden = gardenDao.findById(gardenid).get();
+        boolean checkUser = AuthenticationChecker.checkAuthentication(tempGarden.getUser().getId());
+        if(!checkUser){
+
+            return "redirect:/user-gardens";
+        }
         plant.setGarden(gardenDao.findById(gardenid).get());
-        plant.setStatus(1);
         log.info("savePlant(), plant(): {}", plant);
-        //System.out.println(plant.getId());
         plantService.savePlant(plant);
         return "redirect:/user-plants/{gardenid}";
     }
 
     @GetMapping("/user-plants/add/{gardenid}")
     public String addPlant(@PathVariable("gardenid") long gardenid, Model model) {
+        Garden tempGarden = gardenDao.findById(gardenid).get();
+        boolean checkUser = AuthenticationChecker.checkAuthentication(tempGarden.getUser().getId());
+        if(!checkUser){
+
+            return "redirect:/user-gardens";
+        }
         model.addAttribute("gardenid", gardenid);
         model.addAttribute("newplant", new Plant());
 
@@ -74,16 +80,28 @@ public class PlantController {
     @GetMapping("/user-plants/delete-plant/{id}")
     String deleteChoice(@PathVariable("id") long plantId, Model model) {
         long gardenid = plantService.findPlantById(plantId).get().getGarden().getId();
+        Garden tempGarden = gardenDao.findById(gardenid).get();
+        boolean checkUser = AuthenticationChecker.checkAuthentication(tempGarden.getUser().getId());
+        if(!checkUser){
+
+            return "redirect:/user-gardens";
+        }
         model.addAttribute("bId", plantId);
         model.addAttribute("gardenid",gardenid);
         return "delete-plant";
     }
 
     @GetMapping("/user-plants/delete/{deleteId}")
-    String deleteBook(@PathVariable("deleteId") long plantId, Model model) {
+    String deletePlant(@PathVariable("deleteId") long plantId, Model model) {
 
-        log.info("deletePlant(), id: {}", plantId);
         long gardenid = plantService.findPlantById(plantId).get().getGarden().getId();
+        Garden tempGarden = gardenDao.findById(gardenid).get();
+        boolean checkUser = AuthenticationChecker.checkAuthentication(tempGarden.getUser().getId());
+        if(!checkUser){
+
+            return "redirect:/user-gardens";
+        }
+        log.info("deletePlant(), id: {}", plantId);
         model.addAttribute("gardenid",gardenid);
         plantService.deletePlant(plantId);
 

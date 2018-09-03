@@ -1,6 +1,5 @@
-package pl.zarosla.webapp.service;
+package pl.zarosla.webapp.service.Implementations;
 
-import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 import pl.zarosla.webapp.BusinessModule.MyUserPrincipal;
 import pl.zarosla.webapp.dao.UserDao;
 import pl.zarosla.webapp.domain.User;
+import pl.zarosla.webapp.service.UserService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 

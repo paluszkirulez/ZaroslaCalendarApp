@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+            <form action="#" th:action="@{'/user-plants/activities/add/'+ ${plantid} }" th:object="${newactivity}" method="post">
+                <div class="form-group" >
+                    <label for="name">1. Activity type:</label>
+                    <select class="form-controll"  name="activityTypeName" id="activityTypeName" required="required">
+                        <option disabled="disabled" selected="selected" ><i>-- select the action --</i></option>
+                        <option>Watering</option>
+                        <option>Fertilizing</option>
+                        <option>Transplantation</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group" >
+                    <label for="notatka">2. Notes:</label>
+                    <input type="text"  name="notatka" id="notatka" required="required" th:width="300" />
+                </div>
+
+
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Add new activity</button>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

@@ -135,24 +135,7 @@ public class Plant {
         this.notatka = notatka;
     }
 
-    @Override
-    public String toString() {
-        return "Plant{" +
-                "id=" + id +
-                ", garden=" + garden +
-                ", presentOrPlanned=" + presentOrPlanned +
-                ", plantingDate=" + plantingDate +
-                ", wateredDate=" + wateredDate +
-                ", wateringFrequency=" + wateringFrequency +
-                ", transplantationDate=" + transplantationDate +
-                ", species='" + species + '\'' +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", status=" + status +
-                ", activities=" + activities +
-                ", notatka='" + notatka + '\'' +
-                '}';
-    }
+
 
     public Plant(boolean presentOrPlanned, Date plantingDate, Date wateredDate, int wateringFrequency, Date transplantationDate, String species, String type, String name, int status, String notatka) {
         this.presentOrPlanned = presentOrPlanned;

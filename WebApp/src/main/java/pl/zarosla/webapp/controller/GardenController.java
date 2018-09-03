@@ -48,6 +48,15 @@ public class GardenController {
         return "gardens";
     }
 
+    @PostMapping("/user-gardens")
+    public String postUserGardens(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserPrincipal myUser = (MyUserPrincipal) authentication.getPrincipal();
+        model.addAttribute("gardens", gardenService.findGardensByUser(myUser.getUser()));
+
+        return "gardens";
+    }
+
     @PostMapping("/user-gardens/add")
     public String saveGarden(@ModelAttribute Garden garden){
 
