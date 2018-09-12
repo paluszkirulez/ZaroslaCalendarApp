@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.Constraint;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -21,23 +22,49 @@ public class User {
     private String password;
     private String avatarPicture;
 
-    private boolean active=true;
+    private boolean active=false;
+    private boolean activated = false;
+    private boolean locked = false;
+    private boolean expired = false;
     private int userType=1;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="USER_ID")
     private Set<Garden> gardens;
 
-    public User(String email, String name, String surname, String password, String avatarPicture, boolean active, int userType, Set<Garden> gardens) {
+
+
+    public User(String email, String name, String surname, String password, String avatarPicture, boolean active, boolean activated, boolean locked, boolean expired, int userType, Collection<Role> roles, Set<Garden> gardens) {
         String hashed = new BCryptPasswordEncoder(11).encode(password);
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.password = hashed;
         this.avatarPicture = avatarPicture;
-        this.active = true;
+        this.active = active;
+        this.activated = activated;
+        this.locked = locked;
+        this.expired = expired;
         this.userType = userType;
+        this.roles = roles;
         this.gardens = gardens;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -50,6 +77,9 @@ public class User {
                 ", password='" + password + '\'' +
                 ", avatarPicture='" + avatarPicture + '\'' +
                 ", active=" + active +
+                ", activated=" + activated +
+                ", locked=" + locked +
+                ", expired=" + expired +
                 ", userType=" + userType +
                 ", gardens=" + gardens +
                 '}';
@@ -132,5 +162,29 @@ public class User {
 
     public void setGardens(Set<Garden> gardens) {
         this.gardens = gardens;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 }

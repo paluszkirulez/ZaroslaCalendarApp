@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zarosla.webapp.BusinessModule.DateUtil;
 import pl.zarosla.webapp.dao.ActivityDao;
+import pl.zarosla.webapp.dao.PlantDao;
 import pl.zarosla.webapp.domain.Activity;
 import pl.zarosla.webapp.domain.Plant;
 import pl.zarosla.webapp.service.ActivityService;
@@ -21,6 +23,8 @@ public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private ActivityDao activityDao;
 
+    @Autowired
+    private PlantDao plantDao;
 
     @Override
     public List<Activity> listAllActivities() {
@@ -43,8 +47,23 @@ public class ActivityServiceImpl implements ActivityService {
         java.sql.Date myDate = new java.sql.Date(date.getTime());
         activity.setActivityDate(myDate);
 
+        //override date for plants
+        Plant tempPlant = activity.getPlant();
+        if("watering".equalsIgnoreCase(activity.getActivityTypeNameString())){
+
+            tempPlant.setWateredDate(myDate);
+            Date tempDate = DateUtil.addDays(date,tempPlant.getWateringFrequency());
+            tempPlant.setNextWateringDate(new java.sql.Date(tempDate.getTime()));
+        } else if("fertilizing".equalsIgnoreCase(activity.getActivityTypeNameString())){
+            tempPlant.setFertilizingDate(myDate);
+        } else if("transplantation".equalsIgnoreCase(activity.getActivityTypeNameString())){
+            tempPlant.setTransplantationDate(myDate);
+        }
+        tempPlant.setLastActivityDate(myDate);
 
         activityDao.save(activity);
+        plantDao.save(tempPlant);
+
     }
 
     @Override

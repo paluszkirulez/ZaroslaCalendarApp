@@ -1,5 +1,7 @@
 package pl.zarosla.webapp.domain;
 
+import pl.zarosla.webapp.BusinessModule.ActivitiesTypes;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -15,8 +17,8 @@ public class Activity {
     @ManyToOne
     private ActivityType activityType;
 
-    private String activityTypeName;
-
+    private ActivitiesTypes activityTypeName;
+    private String activityTypeNameString;
     @Column(length = 1024)
     private String notatka;
 
@@ -25,20 +27,33 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(Plant plant, ActivityType activityType, String notatka, Date activityDate, String activityTypeName) {
-        this.plant = plant;
-        this.activityType = activityType;
-        this.notatka = notatka;
-        this.activityDate = activityDate;
+    public void setActivityTypeName(ActivitiesTypes activityTypeName) {
         this.activityTypeName = activityTypeName;
     }
 
-    public String getActivityTypeName() {
+    public String getActivityTypeNameString() {
+        return activityTypeNameString;
+    }
+
+    public void setActivityTypeNameString(String activityTypeNameString) {
+        this.activityTypeNameString = activityTypeNameString;
+    }
+
+    public Activity(Plant plant, ActivityType activityType, String activityTypeNameString, String notatka, Date activityDate) {
+        this.plant = plant;
+        this.activityType = activityType;
+        this.activityTypeNameString=activityTypeNameString;
+        this.activityTypeName = ActivitiesTypes.valueOf(activityTypeNameString);
+        this.notatka = notatka;
+        this.activityDate = activityDate;
+    }
+
+    public ActivitiesTypes getActivityTypeName() {
         return activityTypeName;
     }
 
-    public void setActivityTypeName(String activityTypeName) {
-        this.activityTypeName = activityTypeName;
+    public void setActivityTypeName(String activityTypeNameString) {
+        this.activityTypeName = ActivitiesTypes.valueOf(activityTypeNameString);
     }
 
     public Long getId() {

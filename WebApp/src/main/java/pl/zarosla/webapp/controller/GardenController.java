@@ -17,6 +17,7 @@ import pl.zarosla.webapp.domain.Garden;
 import pl.zarosla.webapp.domain.User;
 import pl.zarosla.webapp.service.GardenService;
 import pl.zarosla.webapp.service.UserService;
+import pl.zarosla.webapp.service.mail.EmailService;
 
 import java.util.Date;
 
@@ -26,6 +27,7 @@ public class GardenController {
     private static final Logger log = LoggerFactory.getLogger(GardenController.class);
 
     private GardenService gardenService;
+    private EmailService emailService;
 
 
 
@@ -68,6 +70,7 @@ public class GardenController {
         log.info("saveGarden(), garden(): {}", garden);
 
         gardenService.saveGarden(garden);
+        //emailService.sendSimpleMessage("bartek.dawid1@gmail.com","test","test");
         return "redirect:/user-gardens";
     }
 

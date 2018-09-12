@@ -19,6 +19,9 @@ public class Plant {
     private Date wateredDate;
     private int wateringFrequency;
     private Date transplantationDate;
+    private Date fertilizingDate;
+    private Date lastActivityDate;
+    private Date nextWateringDate;
     private String species;
     private String type;
     private String name;
@@ -26,6 +29,30 @@ public class Plant {
     @OneToMany
     @JoinColumn(name="PLANT_ID")
     private Set<Activity> activities;
+
+    public Date getFertilizingDate() {
+        return fertilizingDate;
+    }
+
+    public void setFertilizingDate(Date fertilizingDate) {
+        this.fertilizingDate = fertilizingDate;
+    }
+
+    public Date getLastActivityDate() {
+        return lastActivityDate;
+    }
+
+    public void setLastActivityDate(Date lastActivityDate) {
+        this.lastActivityDate = lastActivityDate;
+    }
+
+    public Date getNextWateringDate() {
+        return nextWateringDate;
+    }
+
+    public void setNextWateringDate(Date nextWateringDate) {
+        this.nextWateringDate = nextWateringDate;
+    }
 
     @Column(length = 1024)
     private String notatka;
@@ -136,17 +163,21 @@ public class Plant {
     }
 
 
-
-    public Plant(boolean presentOrPlanned, Date plantingDate, Date wateredDate, int wateringFrequency, Date transplantationDate, String species, String type, String name, int status, String notatka) {
+    public Plant(Garden garden, boolean presentOrPlanned, Date plantingDate, Date wateredDate, int wateringFrequency, Date transplantationDate, Date fertilizingDate, Date lastActivityDate, Date nextWateringDate, String species, String type, String name, int status, Set<Activity> activities, String notatka) {
+        this.garden = garden;
         this.presentOrPlanned = presentOrPlanned;
         this.plantingDate = plantingDate;
         this.wateredDate = wateredDate;
         this.wateringFrequency = wateringFrequency;
         this.transplantationDate = transplantationDate;
+        this.fertilizingDate = fertilizingDate;
+        this.lastActivityDate = lastActivityDate;
+        this.nextWateringDate = nextWateringDate;
         this.species = species;
         this.type = type;
         this.name = name;
         this.status = status;
+        this.activities = activities;
         this.notatka = notatka;
         this.garden.setNumberOfPlants(garden.getNumberOfPlants()+1);
     }

@@ -46,7 +46,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="activity: ${activities}">
-                        <td th:text="${activity.getActivityTypeName()}">...</td>
+                        <td th:text="${activity.getActivityTypeNameString()}">...</td>
                         <td th:text="${activity.getNotatka()}">...</td>
                         <td th:text="${activity.getActivityDate()}">...</td>
 

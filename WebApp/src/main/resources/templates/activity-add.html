@@ -10,7 +10,7 @@
             <form action="#" th:action="@{'/user-plants/activities/add/'+ ${plantid} }" th:object="${newactivity}" method="post">
                 <div class="form-group" >
                     <label for="name">1. Activity type:</label>
-                    <select class="form-controll"  name="activityTypeName" id="activityTypeName" required="required">
+                    <select class="form-controll"  name="activityTypeNameString" id="activityTypeName" required="required">
                         <option disabled="disabled" selected="selected" ><i>-- select the action --</i></option>
                         <option>Watering</option>
                         <option>Fertilizing</option>
