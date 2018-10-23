@@ -2,6 +2,7 @@ package pl.zarosla.webapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySources;
 
 import java.io.FileInputStream;
@@ -15,6 +16,8 @@ public class Application {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(Application.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+
+        //context.addApplicationListener(new InitialDataLoader());
     }
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+            <form action="#" th:action="@{'/user-plants/add/'+ ${gardenid} }" th:object="${newplant}" method="post">
+                <div class="form-group" >
+                    <label for="name">1. Plant Name:</label>
+                    <input type="text"  name="name" id="name" required="required"/>
+                </div>
+
+                <div class="form-group" >
+                    <label for="name">2. Is this lant already present?</label>
+                    <input type="checkbox"  name="PresentOrPlanned" id="PresentOrPlanned"/>
+                </div>
+
+                <div class="form-group" >
+                    <label for="species">3. Species:</label>
+                    <input type="text"  name="species" id="species" required="required"/>
+                </div>
+
+                <div class="form-group" >
+                    <label for="type">4. Type:</label>
+                    <input type="text"  name="type" id="type" required="required"/>
+                </div>
+
+                <div class="form-group" >
+                    <label for="wateringFrequency">5. Watering frequency:</label>
+                    <input type="text"  name="wateringFrequency" id="wateringFrequency" required="required"/>
+                </div>
+                <div class="form-group" >
+                    <label for="notatka">6. Notes:</label>
+                    <input type="text"  name="notatka" id="notatka" required="required" th:width="300" />
+                </div>
+
+
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Add new plant</button>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

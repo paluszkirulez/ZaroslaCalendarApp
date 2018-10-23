@@ -12,6 +12,13 @@ public class Privilege {
 
     private String name;
 
+    public Privilege(String name) {
+        this.name = name;
+    }
+
+    public Privilege() {
+    }
+
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
 }

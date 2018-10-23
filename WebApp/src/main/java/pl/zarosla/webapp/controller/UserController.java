@@ -8,8 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.zarosla.webapp.BusinessModule.EmailComposer;
 import pl.zarosla.webapp.domain.User;
+import pl.zarosla.webapp.domain.VerificationToken;
 import pl.zarosla.webapp.service.UserService;
+import pl.zarosla.webapp.service.VerificationTokenService;
+import pl.zarosla.webapp.service.mail.EmailService;
 
 @Controller
 public class UserController {
@@ -23,7 +27,13 @@ public class UserController {
     public String saveUser(@ModelAttribute User user){
         log.info("saveUser(), user(): {}", user);
         userService.saveUser(user);
-        return "redirect:/login";
+
+        return "activation";
+    }
+
+    @GetMapping("/user/activation")
+    public String activateUser(Model model){
+        return "activation";
     }
 
     @GetMapping("/user/register")

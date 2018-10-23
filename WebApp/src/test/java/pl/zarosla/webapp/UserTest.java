@@ -28,8 +28,7 @@ public class UserTest {
 
     @Test
     public void checkUser(){
-        User user = new User("bartek@mail","bartek","dawid","aaa",
-                "pic.jpg",true,1,new HashSet<Garden>());
+        User user = new User();
         userService.saveUser(user);
         System.out.println(user);
         Assert.assertEquals(1,1);

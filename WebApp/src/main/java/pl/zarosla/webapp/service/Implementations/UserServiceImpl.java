@@ -7,13 +7,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.zarosla.webapp.BusinessModule.EmailComposer;
 import pl.zarosla.webapp.BusinessModule.MyUserPrincipal;
+import pl.zarosla.webapp.dao.RoleDao;
 import pl.zarosla.webapp.dao.UserDao;
+import pl.zarosla.webapp.dao.VerificationTokenDao;
+import pl.zarosla.webapp.domain.Role;
 import pl.zarosla.webapp.domain.User;
+import pl.zarosla.webapp.domain.VerificationToken;
 import pl.zarosla.webapp.service.UserService;
 
+import javax.mail.MessagingException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -27,7 +35,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     public UserServiceImpl(UserDao userDao){this.userDao=userDao;}
 
+    @Autowired
+    public RoleDao roleDao;
 
+    @Autowired
+    public VerificationTokenDao verificationTokenDao;
 
     @Override
     public List<User> listAllUsers() {
@@ -42,7 +54,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void saveUser(User user) {
+        Set<Role> userDefaultRoles = new HashSet<>();
+        userDefaultRoles.add(roleDao.findById(Long.valueOf(4)).get());
+        user.setRoles(userDefaultRoles);
         userDao.save(user);
+        VerificationToken token = new VerificationToken(user);
+        verificationTokenDao.save(token);
+        try {
+            EmailComposer.registrationEmail(user.getEmail(),token.getToken());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

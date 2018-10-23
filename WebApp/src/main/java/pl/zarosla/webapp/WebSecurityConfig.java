@@ -65,7 +65,11 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/user/register")
         .and()
-        .ignoring().antMatchers("/register.html");
+        .ignoring().antMatchers("/register.html")
+        .and()
+        .ignoring().antMatchers("/activation")
+        .and()
+        .ignoring().antMatchers("/activation.html");
     }
 
 /*    @Bean
